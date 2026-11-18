@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <!-- Hafiz Sab app icon: same mark as the sidebar logo. Source for build/icon.png (run: npm run icon) -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3b7bff"/>
+      <stop offset="1" stop-color="#1d4fd8"/>
+    </linearGradient>
+  </defs>
+  <!-- macOS icon grid: 824px tile with 100px margin -->
+  <rect x="100" y="100" width="824" height="824" rx="185" fill="url(#bg)"/>
+  <path d="M232 512c70-140 140-140 210 0s140 140 210 0 98-84 140-56" fill="none" stroke="#fff" stroke-width="64" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

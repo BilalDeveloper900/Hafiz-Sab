@@ -1,0 +1,37 @@
+{
+  "name": "hafiz-sab",
+  "version": "1.0.0",
+  "description": "Embroidery shop manager: employees, thread stock, design cone calculator",
+  "main": "src/main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "node --test src/*.test.js",
+    "postinstall": "electron-builder install-app-deps",
+    "dist": "electron-builder --win",
+    "icon": "electron build/render-icon.js"
+  },
+  "author": "",
+  "type": "commonjs",
+  "dependencies": {
+    "better-sqlite3": "^13.2.0"
+  },
+  "devDependencies": {
+    "electron": "^45.3.4",
+    "electron-builder": "^26.18.0"
+  },
+  "allowScripts": {
+    "better-sqlite3@13.2.0": true,
+    "electron-winstaller@5.4.0": true
+  },
+  "productName": "Hafiz Sab Embroidery",
+  "build": {
+    "appId": "com.hafizsab.embroidery",
+    "files": [
+      "src/**/*",
+      "seed/**/*"
+    ],
+    "win": {
+      "target": "nsis"
+    }
+  }
+}

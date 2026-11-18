@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'">
+  <title>Hafiz Sab Embroidery</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Icon sprite: use as <svg class="icon"><use href="#i-name"/></svg> -->
+  <svg width="0" height="0" style="position:absolute">
+    <symbol id="i-calc" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 11h.01M12 11h.01M16 11h.01M8 15h.01M12 15h.01M16 15h.01M8 19h.01M12 19h.01M16 19h.01"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5M12 15V3"/></symbol>
+    <symbol id="i-upload" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m17 8-5-5-5 5M12 3v12"/></symbol>
+    <symbol id="i-cone" viewBox="0 0 24 24"><path d="M12 3 5 21h14L12 3z"/><path d="M8 13h8M6.5 17h11"/></symbol>
+    <symbol id="i-thread" viewBox="0 0 24 24"><path d="M2 12c2.5-5 5-5 7.5 0s5 5 7.5 0 3.5-3 5-2"/></symbol>
+    <symbol id="i-palette" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="10" r="1.5"/><circle cx="12" cy="7" r="1.5"/><circle cx="16" cy="10" r="1.5"/><path d="M12 22a3 3 0 0 1 0-6h3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18M8 6V4h8v2M19 6l-1 14H6L5 6"/></symbol>
+    <symbol id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-open" viewBox="0 0 24 24"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+  </svg>
+
+  <div class="app">
+    <nav class="sidebar">
+      <div class="brand"><span class="brand-mark"><svg class="icon"><use href="#i-thread"/></svg></span>Hafiz Sab</div>
+      <button class="nav-item active" data-page="calc" data-title="Designs" data-sub="Thread and cones needed for each design"><svg class="icon"><use href="#i-calc"/></svg>Designs</button>
+      <button class="nav-item" data-page="stock" data-title="Thread stock" data-sub="Cones in stock for every colour"><svg class="icon"><use href="#i-layers"/></svg>Thread Stock</button>
+      <button class="nav-item" data-page="employees" data-title="Employees" data-sub="Everyone working in the shop"><svg class="icon"><use href="#i-users"/></svg>Employees</button>
+      <div class="spacer"></div>
+    </nav>
+
+    <div class="main">
+      <header class="topbar">
+        <div>
+          <h1 id="page-title">Designs</h1>
+          <p class="muted" id="page-sub">Thread and cones needed for each design</p>
+        </div>
+        <button class="btn" id="backup"><svg class="icon"><use href="#i-download"/></svg>Backup data</button>
+      </header>
+
+      <main>
+        <!-- ============ Designs ============ -->
+        <section id="calc" class="page">
+          <div class="card card-flush">
+            <div class="card-head">
+              <h2>Designs</h2>
+              <div class="row">
+                <div class="search"><svg class="icon"><use href="#i-search"/></svg><input class="input" id="design-filter" placeholder="Search designs"></div>
+                <button class="btn btn-primary" id="open-design-form"><svg class="icon"><use href="#i-plus"/></svg>New design</button>
+              </div>
+            </div>
+            <table class="table" id="designs"></table>
+          </div>
+        </section>
+
+        <!-- ============ Add / edit a design (one page for both) ============ -->
+        <section id="design-edit" class="page" hidden>
+          <form id="calc-form" class="stack">
+            <div class="card">
+              <div class="card-head"><h2>Design details</h2></div>
+              <div class="form form-3">
+                <label class="field">Design name <input class="input" name="name" required placeholder="e.g. Bridal dupatta border"></label>
+                <div class="field">Heads
+                  <div class="segmented">
+                    <label><input type="radio" name="heads" value="14" checked>14 head</label>
+                    <label><input type="radio" name="heads" value="28">28 head</label>
+                  </div>
+                </div>
+                <label class="field">Pieces <input class="input" name="pieces" type="number" min="1" value="1"></label>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-head"><h2>Colours and stitches <span class="muted" id="color-count"></span></h2></div>
+              <!-- Searchable picker: type a code or name, pick from suggestions -->
+              <div class="combo" id="color-combo">
+                <div class="combo-box">
+                  <svg class="icon muted"><use href="#i-plus"/></svg>
+                  <input class="combo-input" id="color-search" placeholder="Add a colour: type a code or name, e.g. 1003 or red" autocomplete="off"
+                    role="combobox" aria-expanded="false" aria-controls="color-options" aria-autocomplete="list">
+                </div>
+                <ul class="combo-list" id="color-options" role="listbox" hidden></ul>
+              </div>
+              <div id="color-rows" class="color-rows"></div>
+
+              <!-- Rarely changed, so kept folded away -->
+              <details class="settings">
+                <summary>Thread settings <span class="muted" id="settings-sum"></span> <span class="btn-link">Change</span></summary>
+                <div class="form">
+                  <label class="field">Metres of thread per 1,000 stitches <input class="input" name="metersPer1000Stitches" type="number" step="0.1" min="0.1" value="5"></label>
+                  <label class="field">Thread on one cone (m) <input class="input" name="coneLengthM" type="number" min="1" value="5000"></label>
+                </div>
+              </details>
+            </div>
+
+            <div id="calc-result"></div>
+
+            <!-- Stays at the bottom of the window so Save is always in reach -->
+            <div class="page-actions">
+              <button type="button" class="btn btn-danger" id="delete-design"><svg class="icon"><use href="#i-trash"/></svg>Delete</button>
+              <span class="spacer"></span>
+              <button type="button" class="btn" id="cancel-design">Cancel</button>
+              <button class="btn btn-primary"><svg class="icon"><use href="#i-check"/></svg><span data-save-label>Save design</span></button>
+            </div>
+          </form>
+        </section>
+
+        <!-- ============ Stock ============ -->
+        <section id="stock" class="page" hidden>
+          <div id="stock-stats" class="stats"></div>
+
+          <div class="card card-flush">
+            <div class="card-head">
+              <h2>Colours</h2>
+              <div class="row">
+                <div class="search"><svg class="icon"><use href="#i-search"/></svg><input class="input" id="color-filter" placeholder="Search code or name"></div>
+                <button class="btn" id="import-colors"><svg class="icon"><use href="#i-upload"/></svg>Import CSV</button>
+                <button class="btn btn-primary" id="open-color"><svg class="icon"><use href="#i-plus"/></svg>Add colour</button>
+              </div>
+            </div>
+            <table class="table" id="colors"></table>
+          </div>
+        </section>
+
+        <!-- ============ Employees ============ -->
+        <section id="employees" class="page" hidden>
+          <div class="card card-flush">
+            <div class="card-head">
+              <h2>Team</h2>
+              <div class="row">
+                <div class="search"><svg class="icon"><use href="#i-search"/></svg><input class="input" id="emp-filter" placeholder="Search name, role or phone"></div>
+                <button class="btn btn-primary" id="open-emp"><svg class="icon"><use href="#i-plus"/></svg>Add employee</button>
+              </div>
+            </div>
+            <table class="table" id="emps"></table>
+          </div>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- ============ Popups ============ -->
+  <dialog class="modal" id="move-modal">
+    <form>
+      <div class="modal-head"><div><h2>Record stock</h2><p>Cones received from the supplier or used on a job</p></div><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button></div>
+      <div class="modal-body form">
+        <label class="field full">Colour <select class="input" name="color_id" required></select></label>
+        <div class="field">Type
+          <div class="segmented">
+            <label><input type="radio" name="dir" value="in" checked>Received</label>
+            <label><input type="radio" name="dir" value="out">Used</label>
+          </div>
+        </div>
+        <label class="field">Cones <input class="input" name="qty" type="number" min="1" step="1" required autofocus></label>
+        <label class="field full">Reason <input class="input" name="reason" placeholder="Supplier name, job #, ..."></label>
+      </div>
+      <div class="modal-foot"><button type="button" class="btn" data-close>Cancel</button><button class="btn btn-primary"><svg class="icon"><use href="#i-check"/></svg>Save</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="color-modal">
+    <form>
+      <div class="modal-head"><h2 data-title>Add colour</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button></div>
+      <div class="modal-body form">
+        <label class="field">Code (4 digits) <input class="input" name="code" pattern="\d{4}" maxlength="4" required placeholder="1006" autofocus></label>
+        <label class="field">Name <input class="input" name="name" placeholder="Maroon"></label>
+        <label class="field">Colour <input class="input color-input" name="hex" type="color" value="#ffffff"></label>
+        <label class="field">Cone length (m) <input class="input" name="cone_length_m" type="number" min="1" value="5000"></label>
+      </div>
+      <div class="modal-foot"><button type="button" class="btn" data-close>Cancel</button><button class="btn btn-primary">Save colour</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="modal" id="emp-modal">
+    <form>
+      <input type="hidden" name="id">
+      <div class="modal-head"><h2 data-title>Add employee</h2><button type="button" class="icon-btn" data-close aria-label="Close"><svg class="icon"><use href="#i-x"/></svg></button></div>
+      <div class="modal-body form">
+        <label class="field full">Name <input class="input" name="name" required autofocus></label>
+        <label class="field">Phone <input class="input" name="phone" type="tel"></label>
+        <label class="field">Role <input class="input" name="role" placeholder="Operator, helper, ..." list="roles"></label>
+        <label class="field">Salary <input class="input" name="salary" type="number" min="0"></label>
+        <label class="field">Joined <input class="input" name="join_date" type="date"></label>
+        <label class="field check full"><input name="active" type="checkbox" checked> Currently working</label>
+      </div>
+      <div class="modal-foot"><button type="button" class="btn" data-close>Cancel</button><button class="btn btn-primary">Save employee</button></div>
+    </form>
+  </dialog>
+  <datalist id="roles"><option>Operator</option><option>Helper</option><option>Designer</option><option>Supervisor</option></datalist>
+
+
+
+  <dialog class="modal modal-sm" id="confirm-modal">
+    <form method="dialog">
+      <div class="modal-head"><h2>Are you sure?</h2></div>
+      <div class="modal-body"><p></p></div>
+      <div class="modal-foot"><button class="btn" value="cancel">Cancel</button><button class="btn btn-primary" style="background:var(--red);border-color:var(--red)" value="ok">Delete</button></div>
+    </form>
+  </dialog>
+
+  <div id="msg" class="toast" popover="manual"></div>
+  <script src="app.js"></script>
+</body>
+</html>

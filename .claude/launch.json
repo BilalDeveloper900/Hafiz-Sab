@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "renderer-preview",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["-e", "const fs=require('fs'),p=require('path'),d=p.resolve('src/renderer');require('http').createServer((q,r)=>{const f=p.join(d,decodeURI(q.url.split('?')[0])==='/'?'index.html':decodeURI(q.url.split('?')[0]));if(!f.startsWith(d))return r.writeHead(403).end();fs.readFile(f,(e,b)=>{if(e)return r.writeHead(404).end();r.writeHead(200,{'content-type':{'.html':'text/html','.css':'text/css','.js':'text/javascript'}[p.extname(f)]||'text/plain'}).end(b)})}).listen(process.env.PORT||5179)"],
+      "port": 5179
+    }
+  ]
+}
